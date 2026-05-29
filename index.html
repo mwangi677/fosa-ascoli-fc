@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Club</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <!-- NAVBAR -->
+<nav>
+
+    <div class="logo-container">
+
+        <img
+        src="images/logo 3.png"
+        class="club-logo">
+
+        <h1>Fosa Ascoli FC</h1>
+
+    </div>
+
+
+    <ul>
+
+        <li><a href="#home">Home</a></li>
+
+        <li><a href="#players">Players</a></li>
+
+        <li><a href="#matches">Matches</a></li>
+
+        <li><a href="#statistics">Statistics</a></li>
+
+
+    </ul>
+
+</nav>
+
+
+<!-- HERO SECTION -->
+
+<section id="home" class="hero">
+
+    <div class="hero-slider">
+
+        <img
+        src="images/field.png"
+        class="slide">
+
+        <img
+        src="images/team 2.png"
+        class="slide active">
+
+        <img
+        src="images/team 1.png"
+        class="slide">
+
+        
+
+    </div>
+
+
+    <!-- OVERLAY TEXT -->
+
+    <div class="hero-overlay">
+
+        <h2>
+            Welcome To Fosa Ascoli FC
+        </h2>
+
+        <p>
+            View players, matches and club updates
+        </p>
+
+    </div>
+
+
+    <!-- ARROWS -->
+
+    <button class="hero-btn prev">
+
+        ❮
+
+    </button>
+
+    <button class="hero-btn next">
+
+        ❯
+
+    </button>
+
+</section>
+
+
+
+<!-- PLAYERS SECTION -->
+
+<section id="players" class="players-section">
+
+    <h2 class="section-title">
+        Our Players
+    </h2>
+
+    <div class="players-wrapper">
+
+        <button class="slider-btn left-btn"
+        onclick="scrollPlayersLeft()">
+
+            ❮
+
+        </button>
+
+
+        <div id="homepagePlayers"></div>
+
+
+        <button class="slider-btn right-btn"
+        onclick="scrollPlayersRight()">
+
+            ❯
+
+        </button>
+
+    </div>
+
+</section>
+
+   
+
+<!-- MATCHES SECTION -->
+
+<section id="matches" class="matches-section">
+
+    <h2>Upcoming Matches</h2>
+
+<div id="homepageMatches"></div>
+
+
+    </div>
+
+</section>
+
+<!-- STATISTICS SECTION -->
+
+<section id="statistics" class="statistics-section">
+
+    <h2>Club Statistics</h2>
+
+    <div class="stats-container">
+
+        <div class="stat-card">
+
+         <h3 id="homeMatchesPlayed">25</h3>
+
+            <p>Matches Played</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <h3 id="homeMatchesWon">18</h3>
+           
+          <p>Wins</p> 
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3 id="homeGoalsScored">60</h3>
+
+            <p>Goals Scored</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

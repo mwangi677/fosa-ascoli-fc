@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="admin-body">
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>Fosa Admin</h2>
+
+        <button
+        class="nav-btn"
+        onclick="showSection('playersSection')">
+
+            Players
+
+        </button>
+
+
+        <button
+        class="nav-btn"
+        onclick="showSection('matchesSection')">
+
+            Matches
+
+        </button>
+
+
+        <button
+        class="nav-btn"
+        onclick="showSection('statsSection')">
+
+            Statistics
+
+        </button>
+
+
+        <button
+        class="nav-btn"
+        onclick="showSection('adminSection')">
+
+            Admin
+
+        </button>
+
+      
+        <button
+        class="nav-btn"
+        onclick="logout()">
+
+        Logout
+
+        </button>
+
+
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+
+        <!-- PLAYERS SECTION -->
+
+        <section
+        id="playersSection"
+        class="dashboard-section">
+
+            <h1>Manage Players</h1>
+
+            <div class="player-form">
+
+                <input
+                type="text"
+                id="playerName"
+                placeholder="Player Name">
+
+
+                <input
+                type="text"
+                id="playerPosition"
+                placeholder="Position">
+
+
+                <input
+                type="number"
+                id="playerGoals"
+                placeholder="Goals">
+
+
+                <input
+                type="number"
+                id="playerAssists"
+                placeholder="Assists">
+
+
+                <input
+                type="file"
+                id="playerPhoto">
+
+
+                <textarea
+                id="playerComment"
+                placeholder="Player Comment">
+
+                </textarea>
+
+
+                <button onclick="addPlayer()">
+
+                    Add Player
+
+                </button>
+
+            </div>
+
+
+            <div id="adminPlayersContainer">
+
+            </div>
+
+        </section>
+
+
+        <!-- MATCHES SECTION -->
+
+        <section
+        id="matchesSection"
+        class="dashboard-section">
+
+            <h1>Manage Matches</h1>
+
+            <div class="player-form">
+
+                <input
+                type="text"
+                id="homeTeam"
+                placeholder="Home Team">
+
+
+                <input
+                type="text"
+                id="awayTeam"
+                placeholder="Away Team">
+
+
+                <input
+                type="date"
+                id="matchDate">
+
+                <input
+                type="time"
+                id="matchTime">
+
+
+               <input
+               type="file"
+               id="homeLogo">
+
+
+                <input
+                type="file"
+                id="awayLogo">
+
+
+                <button onclick="addMatch()">
+
+                    Add Match
+
+                </button>
+
+            </div>
+
+
+            <div id="matchesContainer">
+
+            </div>
+
+        </section>
+
+
+        <!-- STATS SECTION -->
+
+        <section
+        id="statsSection"
+        class="dashboard-section">
+
+            <h1>Update Statistics</h1>
+
+            <div class="player-form">
+
+                <input
+                type="number"
+                id="matchesPlayed"
+                placeholder="Matches Played">
+
+
+                <input
+                type="number"
+                id="matchesWon"
+                placeholder="Matches Won">
+
+
+                <input
+                type="number"
+                id="goalsScored"
+                placeholder="Goals Scored">
+
+
+                <button onclick="updateStats()">
+
+                    Update Statistics
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMIN SECTION -->
+
+        <section
+        id="adminSection"
+        class="dashboard-section">
+
+            <h1>Manage Admin</h1>
+
+            <div class="player-form">
+
+                <input
+                type="text"
+                id="newAdminUsername"
+                placeholder="New Username">
+
+
+                <input
+                type="password"
+                id="newAdminPassword"
+                placeholder="New Password">
+
+
+                <button onclick="updateAdmin()">
+
+                    Update Admin
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,623 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: white;
+    line-height: 1.6;
+}
+
+
+/* NAVBAR */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #1e293b;
+}
+
+.logo-container{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.club-logo{
+
+    width: 130px;
+
+    height: 130px;
+
+    object-fit: contain;
+
+    background: transparent;
+
+    display: block;
+}
+
+
+nav h1{
+
+    font-size: 42px;
+
+    color: white;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.admin-btn{
+    background-color: green;
+    padding: 10px 15px;
+}
+
+
+/* HERO SECTION */
+
+.hero{
+
+    position: relative;
+
+    height: 550px;
+
+    overflow: hidden;
+}
+
+
+.hero-slider{
+
+    width: 100%;
+
+    height: 100%;
+}
+
+
+.slide{
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: fill;
+
+    opacity: 0;
+
+    transition: opacity 0.5s ease;
+}
+
+
+.slide.active{
+
+    opacity: 1;
+}
+
+
+.hero-overlay{
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+
+    z-index: 2;
+
+    color: white;
+}
+
+.hero-overlay h2{
+
+    font-size: 70px;
+
+    margin-bottom: 15px;
+
+    color: #22c55e;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.8);
+
+    font-family: Impact, sans-serif;
+}
+
+
+.hero-overlay p{
+
+    font-size: 26px;
+
+    color: white;
+
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+
+    font-family: Arial, sans-serif;
+
+    font-weight: bold;
+}
+
+
+
+.hero-btn{
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background: rgba(0,0,0,0.5);
+
+    color: white;
+
+    border: none;
+
+    padding: 18px;
+
+    cursor: pointer;
+
+    font-size: 28px;
+
+    z-index: 3;
+}
+
+
+.prev{
+
+    left: 20px;
+}
+
+
+.next{
+
+    right: 20px;
+}
+
+
+
+
+/* SECTION TITLES */
+
+.players-section h2,
+.matches-section h2,
+.statistics-section h2{
+    text-align: center;
+    font-size: 40px;
+    margin: 60px 0 30px;
+}
+
+
+/* PLAYERS */
+
+.players-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 20px;
+}
+
+#homepagePlayers{
+    display: flex;
+    overflow-x: auto;
+    gap: 25px;
+    scroll-behavior: smooth;
+    padding: 20px;
+}
+
+#homepagePlayers::-webkit-scrollbar{
+    display: none;
+}
+
+
+/* PLAYER CARD */
+
+.player-card{
+    min-width: 320px;
+    background: linear-gradient(
+        135deg,
+        #1e293b,
+        #334155
+    );
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+    transition: 0.3s;
+
+    overflow: hidden;
+}
+
+.player-card:hover{
+    transform: translateY(-8px);
+}
+
+.player-image{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.player-card h3{
+    font-size: 28px;
+    color: #22c55e;
+    padding: 20px 20px 10px;
+}
+
+.player-card p{
+    padding: 0 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+
+}
+
+.player-comment{
+    padding-bottom: 20px;
+    color: #cbd5e1;
+}
+
+
+/* SLIDER BUTTONS */
+
+.slider-btn{
+    background: green;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+
+/* MATCHES */
+
+.matches-section,
+.statistics-section{
+    padding: 60px 20px;
+}
+
+#homepageMatches,
+#matchesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.match-logos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.team-logo{
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    background-color: white;
+    padding: 5px;
+}
+
+
+/* STATS */
+
+.stats-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.stat-card{
+    width: 300px;
+
+    background: linear-gradient(
+        135deg,
+        #1e293b,
+        #334155
+    );
+
+    padding: 40px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+    transition: 0.3s;
+}
+
+.stat-card:hover{
+    transform: translateY(-8px);
+}
+
+.stat-card h3{
+    font-size: 55px;
+    color: #22c55e;
+    margin-bottom: 10px;
+}
+
+
+/* LOGIN PAGE */
+
+.login-container{
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b
+    );
+}
+
+.login-box{
+    background-color: white;
+    padding: 40px;
+    width: 400px;
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.login-box h1{
+    color: #0f172a;
+    margin-bottom: 30px;
+}
+
+.login-box input{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.login-box button{
+    width: 100%;
+    padding: 15px;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+/* ADMIN DASHBOARD */
+
+.admin-body{
+    background-color: #0f172a;
+}
+
+.sidebar{
+    width: 250px;
+    height: 100vh;
+    background-color: #1e293b;
+
+    position: fixed;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar h2{
+    text-align: center;
+}
+
+.nav-btn{
+    padding: 15px;
+    border: none;
+    background-color: #334155;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-btn:hover{
+    background-color: #22c55e;
+}
+
+.main-content{
+    margin-left: 270px;
+    padding: 30px;
+}
+
+.dashboard-section{
+    display: none;
+}
+
+
+/* FORMS */
+
+.player-form{
+    background-color: #1e293b;
+
+    padding: 30px;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.player-form input,
+.player-form textarea{
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+    background-color: #334155;
+    color: white;
+}
+
+.player-form textarea{
+    height: 120px;
+    resize: none;
+}
+
+.player-form button{
+    padding: 15px;
+    border: none;
+    background-color: #22c55e;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+/* ADMIN PLAYERS */
+
+#adminPlayersContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+
+/* BUTTONS */
+
+.delete-btn{
+    background-color: crimson;
+    padding: 12px 18px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-btn{
+    background-color: orange;
+    padding: 12px 18px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.player-actions{
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+
+/* MESSAGE BOX */
+
+#messageBox{
+    width: fit-content;
+
+    margin: 20px auto;
+
+    padding: 15px 25px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    display: none;
+}
+
+.success-message{
+    background-color: #22c55e;
+}
+
+.delete-message{
+    background-color: crimson;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width: 768px){
+
+    nav{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav ul{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h2{
+        font-size: 45px;
+    }
+
+    .hero p{
+        font-size: 20px;
+    }
+
+    .sidebar{
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content{
+        margin-left: 0;
+    }
+}
+
+/* MATCH DATE & TIME */
+
+#homepageMatches p,
+#matchesContainer p{
+
+    text-align: center;
+
+}
+
+#homepageMatches .player-card,
+#matchesContainer .player-card{
+
+    width: 550px;
+
+    padding: 25px;
+
+}
+
+
+

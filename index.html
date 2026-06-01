@@ -3,184 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Club</title>
+    <title>Fosa Ascoli FC | Official Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home-page">
 
- <!-- NAVBAR -->
-<nav>
+<header class="site-header" id="siteHeader">
+    <nav class="main-nav">
+        <a href="#home" class="brand">
+            <img src="images/logo 4.png" alt="Fosa Ascoli FC crest" class="club-logo">
+            <div class="brand-text">
+                <span class="brand-name">Fosa Ascoli FC</span>
+                <span class="brand-tagline">Official Club Website</span>
+            </div>
+        </a>
 
-    <div class="logo-container">
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-        <img
-        src="images/logo 3.png"
-        class="club-logo">
-
-        <h1>Fosa Ascoli FC</h1>
-
-    </div>
-
-
-    <ul>
-
-        <li><a href="#home">Home</a></li>
-
-        <li><a href="#players">Players</a></li>
-
-        <li><a href="#matches">Matches</a></li>
-
-        <li><a href="#statistics">Statistics</a></li>
-
-
-    </ul>
-
-</nav>
-
-
-<!-- HERO SECTION -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#players">Players</a></li>
+            <li><a href="#matches">Matches</a></li>
+            <li><a href="#statistics">Statistics</a></li>
+        </ul>
+    </nav>
+</header>
 
 <section id="home" class="hero">
-
     <div class="hero-slider">
-
-        <img
-        src="images/field.png"
-        class="slide">
-
-        <img
-        src="images/team 2.png"
-        class="slide active">
-
-        <img
-        src="images/team 1.png"
-        class="slide">
-
-        
-
+        <img src="images/field.png" alt="Club stadium" class="slide">
+        <img src="images/team 2.png" alt="First team squad" class="slide active">
+        <img src="images/team 1.png" alt="Team training" class="slide">
     </div>
 
-
-    <!-- OVERLAY TEXT -->
+    <div class="hero-gradient"></div>
 
     <div class="hero-overlay">
-
-        <h2>
-            Welcome To Fosa Ascoli FC
-        </h2>
-
-        <p>
-            View players, matches and club updates
-        </p>
-
+        <h2>Welcome to Fosa Ascoli FC</h2>
+        <p class="hero-lead">Latest news, players, fixtures and club updates — all in one place.</p>
     </div>
 
-
-    <!-- ARROWS -->
-
-    <button class="hero-btn prev">
-
-        ❮
-
-    </button>
-
-    <button class="hero-btn next">
-
-        ❯
-
-    </button>
-
-</section>
-
-
-
-<!-- PLAYERS SECTION -->
-
-<section id="players" class="players-section">
-
-    <h2 class="section-title">
-        Our Players
-    </h2>
-
-    <div class="players-wrapper">
-
-        <button class="slider-btn left-btn"
-        onclick="scrollPlayersLeft()">
-
-            ❮
-
-        </button>
-
-
-        <div id="homepagePlayers"></div>
-
-
-        <button class="slider-btn right-btn"
-        onclick="scrollPlayersRight()">
-
-            ❯
-
-        </button>
-
+    <div class="hero-controls">
+        <button class="hero-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
+        <div class="hero-dots" id="heroDots" aria-hidden="true"></div>
+        <button class="hero-btn next" type="button" aria-label="Next slide">&#10095;</button>
     </div>
-
 </section>
 
-   
-
-<!-- MATCHES SECTION -->
-
-<section id="matches" class="matches-section">
-
-    <h2>Upcoming Matches</h2>
-
-<div id="homepageMatches"></div>
-
-
-    </div>
-
-</section>
-
-<!-- STATISTICS SECTION -->
-
-<section id="statistics" class="statistics-section">
-
-    <h2>Club Statistics</h2>
-
-    <div class="stats-container">
-
-        <div class="stat-card">
-
-         <h3 id="homeMatchesPlayed">25</h3>
-
-            <p>Matches Played</p>
-
+<main>
+    <section id="news" class="news-section section-block section-block--alt">
+        <div class="section-inner">
+            <header class="section-header">
+                <span class="section-label">Club</span>
+                <h2 class="section-title">Latest News</h2>
+            </header>
+            <div id="homepageNews" class="news-grid"></div>
         </div>
+    </section>
 
+    <section id="players" class="players-section section-block">
+        <div class="section-inner">
+            <header class="section-header">
+                <span class="section-label">Squad</span>
+                <h2 class="section-title">Our Players</h2>
+            </header>
 
-        <div class="stat-card">
-
-          <h3 id="homeMatchesWon">18</h3>
-           
-          <p>Wins</p> 
-
+            <div class="players-wrapper">
+                <button class="slider-btn left-btn" type="button" onclick="scrollPlayersLeft()" aria-label="Scroll players left">&#10094;</button>
+                <div id="homepagePlayers" class="players-track"></div>
+                <button class="slider-btn right-btn" type="button" onclick="scrollPlayersRight()" aria-label="Scroll players right">&#10095;</button>
+            </div>
         </div>
+    </section>
 
-
-        <div class="stat-card">
-
-            <h3 id="homeGoalsScored">60</h3>
-
-            <p>Goals Scored</p>
-
+    <section id="matches" class="matches-section section-block section-block--alt">
+        <div class="section-inner">
+            <header class="section-header">
+                <span class="section-label">Fixtures</span>
+                <h2 class="section-title">Upcoming Matches</h2>
+            </header>
+            <div id="homepageMatches" class="matches-grid"></div>
         </div>
+    </section>
 
-    </div>
+    <section id="statistics" class="statistics-section section-block">
+        <div class="section-inner">
+            <header class="section-header">
+                <span class="section-label">Season</span>
+                <h2 class="section-title">Club Statistics</h2>
+            </header>
 
-</section>
+            <div class="stats-container">
+                <article class="stat-card">
+                    <h3 id="homeMatchesPlayed">25</h3>
+                    <p>Matches Played</p>
+                </article>
+                <article class="stat-card">
+                    <h3 id="homeMatchesWon">18</h3>
+                    <p>Wins</p>
+                </article>
+                <article class="stat-card">
+                    <h3 id="homeGoalsScored">60</h3>
+                    <p>Goals Scored</p>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; <span id="footerYear"></span> Fosa Ascoli FC. All rights reserved.</p>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

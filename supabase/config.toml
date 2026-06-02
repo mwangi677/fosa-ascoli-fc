@@ -1,0 +1,10 @@
+# Supabase CLI config — project ref from your URL
+project_id = "qpjimunbypimltwrecbg"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+major_version = 15

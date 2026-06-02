@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e7a45"/>
+      <stop offset="100%" stop-color="#155a32"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0c840"/>
+      <stop offset="50%" stop-color="#d4a017"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer shield -->
+  <path d="M100 8 L190 36 L190 132 Q190 188 100 218 Q10 188 10 132 L10 36 Z"
+        fill="url(#shieldGrad)" stroke="url(#goldGrad)" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Inner shield border -->
+  <path d="M100 22 L178 46 L178 128 Q178 178 100 206 Q22 178 22 128 L22 46 Z"
+        fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linejoin="round" opacity="0.5"/>
+
+  <!-- Gold top bar -->
+  <rect x="38" y="34" width="124" height="2" fill="url(#goldGrad)" rx="1"/>
+
+  <!-- Stars -->
+  <g fill="url(#goldGrad)">
+    <polygon points="50,48 53,56 62,56 55,61 57,70 50,65 43,70 45,61 38,56 47,56" />
+    <polygon points="105,48 108,56 117,56 110,61 112,70 105,65 98,70 100,61 93,56 102,56" />
+    <polygon points="160,48 163,56 172,56 165,61 167,70 160,65 153,70 155,61 148,56 157,56" />
+  </g>
+
+  <!-- Football - outer circle -->
+  <circle cx="100" cy="110" r="35" fill="white" stroke="#155a32" stroke-width="2.5"/>
+
+  <!-- Football center pentagon -->
+  <polygon points="100,92 113,101 108,116 92,116 87,101"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- Football pentagon connecting lines -->
+  <line x1="100" y1="92" x2="100" y2="85" stroke="#155a32" stroke-width="2"/>
+  <line x1="100" y1="92" x2="100" y2="85" stroke="url(#goldGrad)" stroke-width="0.5"/>
+  <line x1="113" y1="101" x2="120" y2="98" stroke="#155a32" stroke-width="2"/>
+  <line x1="108" y1="116" x2="114" y2="122" stroke="#155a32" stroke-width="2"/>
+  <line x1="92" y1="116" x2="86" y2="122" stroke="#155a32" stroke-width="2"/>
+  <line x1="87" y1="101" x2="80" y2="98" stroke="#155a32" stroke-width="2"/>
+
+  <!-- Outer pentagons (simplified) -->
+  <polygon points="125,93 132,98 130,107 121,107 118,98"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.85"/>
+  <polygon points="75,93 68,98 70,107 79,107 82,98"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.85"/>
+  <polygon points="105,128 112,124 115,132 110,139 103,137"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.85"/>
+  <polygon points="95,128 88,124 85,132 90,139 97,137"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.85"/>
+  <polygon points="110,82 115,88 118,96 108,92"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.8"/>
+  <polygon points="90,82 85,88 82,96 92,92"
+            fill="#155a32" stroke="url(#goldGrad)" stroke-width="1" opacity="0.8"/>
+
+  <!-- Ribbon/banner at bottom -->
+  <path d="M30 162 Q100 172 170 162 L175 190 Q100 202 25 190 Z"
+        fill="url(#goldGrad)" stroke="#b8860b" stroke-width="1.5"/>
+
+  <!-- Ribbon folds -->
+  <path d="M30 162 L25 190 L30 192 L35 165 Z" fill="#b8860b" opacity="0.6"/>
+  <path d="M170 162 L175 190 L170 192 L165 165 Z" fill="#b8860b" opacity="0.6"/>
+
+  <!-- Club name on ribbon -->
+  <text x="100" y="181" text-anchor="middle"
+        fill="#155a32" font-family="Georgia, 'Times New Roman', serif"
+        font-size="14" font-weight="900" letter-spacing="3.5">FOSA ASCOLI FC</text>
+
+  <!-- EST text -->
+  <text x="100" y="210" text-anchor="middle"
+        fill="url(#goldGrad)" font-family="system-ui, sans-serif"
+        font-size="8" font-weight="600" letter-spacing="2.5">EST. 2025</text>
+</svg>

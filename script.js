@@ -382,34 +382,34 @@ async function loadHomepagePlayers(){
 
         homepagePlayers.innerHTML += `
 
-            <article class="player-card">
+            <div class="player-card">
 
-                <div class="player-image-wrap">
-                    <img
-                    src="${player.photo}"
-                    alt="${player.name}"
-                    class="player-image">
-                </div>
+                <img
+                src="${player.photo}"
+                class="player-image">
 
-                <div class="player-card-body">
-                    <h3>${player.name}</h3>
-                    <span class="player-position">${player.position}</span>
+                <h3>${player.name}</h3>
 
-                    <div class="player-stats">
-                        <div class="stat-item">
-                            <span class="stat-value">${player.goals ?? 0}</span>
-                            <span class="stat-label">Goals</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value">${player.assists ?? 0}</span>
-                            <span class="stat-label">Assists</span>
-                        </div>
-                    </div>
+                <p>
+                Position:
+                ${player.position}
+                </p>
 
-                    <p class="player-comment">${player.comment || ""}</p>
-                </div>
+                <p>
+                Goals:
+                ${player.goals}
+                </p>
 
-            </article>
+                <p>
+                Assists:
+                ${player.assists}
+                </p>
+
+                <p class="player-comment">
+                ${player.comment}
+                </p>
+
+            </div>
 
         `;
 
@@ -434,345 +434,6 @@ function clearPlayerForm(){
     document.getElementById("playerComment").value = "";
 
     document.getElementById("playerPhoto").value = "";
-
-}
-
-
-// NEWS
-
-async function addNews(){
-
-    const title =
-    document.getElementById("newsTitle").value.trim();
-
-    const newsDate =
-    document.getElementById("newsDate").value;
-
-    const excerpt =
-    document.getElementById("newsExcerpt").value.trim();
-
-    const content =
-    document.getElementById("newsContent").value.trim();
-
-    const photoFile =
-    document.getElementById("newsPhoto").files[0];
-
-
-    if(title === "" || excerpt === "" || newsDate === ""){
-
-        alert("Please enter a title, date, and summary");
-
-        return;
-
-    }
-
-
-    let photo = null;
-
-
-    if(photoFile){
-
-        const fileName =
-        `news-${Date.now()}-${photoFile.name}`;
-
-        const { error: uploadError } =
-        await supabaseClient.storage
-        .from("player-images")
-        .upload(fileName, photoFile);
-
-        if(uploadError){
-
-            console.log(uploadError);
-
-            alert("Image upload failed");
-
-            return;
-
-        }
-
-        const { data: publicUrlData } =
-        supabaseClient.storage
-        .from("player-images")
-        .getPublicUrl(fileName);
-
-        photo = publicUrlData.publicUrl;
-
-    }
-
-
-    const { error } =
-    await supabaseClient
-    .from("news")
-    .insert([
-        {
-            title,
-            excerpt,
-            content,
-            news_date: newsDate,
-            photo
-        }
-    ]);
-
-
-    if(error){
-
-    console.log(error);
-
-    alert(error.message);
-
-    return;
-
-}
-
-
-    alert("News published successfully!");
-
-    clearNewsForm();
-
-    displayNews();
-
-    loadHomepageNews();
-
-}
-
-
-async function displayNews(){
-
-    const container =
-    document.getElementById("adminNewsContainer");
-
-
-    if(!container) return;
-
-
-    container.innerHTML = "";
-
-
-    const { data, error } =
-    await supabaseClient
-    .from("news")
-    .select("*")
-    .order("news_date", { ascending: false });
-
-
-    if(error){
-
-        console.log(error);
-
-        return;
-
-    }
-
-
-    if(!data.length){
-
-        container.innerHTML =
-        "<p class=\"news-empty\">No news articles yet.</p>";
-
-        return;
-
-    }
-
-
-    data.forEach(item => {
-
-        const imageBlock = item.photo
-        ? `<img src="${item.photo}" alt="" class="news-card-image">`
-        : `<div class="news-card-image news-card-image--placeholder">Club News</div>`;
-
-        container.innerHTML += `
-
-            <article class="news-card">
-
-                ${imageBlock}
-
-                <div class="news-card-body">
-                    <time class="news-card-date">${formatNewsDate(item.news_date)}</time>
-                    <h3 class="news-card-title">${item.title}</h3>
-                    <p class="news-card-excerpt">${item.excerpt}</p>
-                    ${item.content ? `<p class="news-card-content">${item.content}</p>` : ""}
-
-                    <button
-                    type="button"
-                    class="delete-btn news-delete-btn"
-                    onclick="deleteNews(${item.id})">
-                        Delete Article
-                    </button>
-                </div>
-
-            </article>
-
-        `;
-
-    });
-
-}
-
-
-async function deleteNews(id){
-
-    if(!confirm("Delete this news article?")){
-
-        return;
-
-    }
-
-    const { error } =
-    await supabaseClient
-    .from("news")
-    .delete()
-    .eq("id", id);
-
-
-    if(error){
-
-        console.log(error);
-
-        alert("Error deleting news");
-
-        return;
-
-    }
-
-
-    alert("News deleted successfully");
-
-    displayNews();
-
-    loadHomepageNews();
-
-}
-
-
-async function loadHomepageNews(){
-
-    const container =
-    document.getElementById("homepageNews");
-
-
-    if(!container) return;
-
-    const newsSection =
-    document.querySelector(".news-section");
-
-    container.innerHTML = "";
-    container.classList.remove("news-grid--filled");
-
-    if(newsSection){
-
-        newsSection.classList.remove("news-section--filled");
-
-    }
-
-
-    const { data, error } =
-    await supabaseClient
-    .from("news")
-    .select("*")
-    .order("news_date", { ascending: false });
-
-
-    if(error){
-
-        console.log(error);
-
-        container.innerHTML =
-        "<p class=\"news-empty\">News will appear here once the club publishes updates.</p>";
-
-        return;
-
-    }
-
-
-    if(!data.length){
-
-        container.innerHTML =
-        "<p class=\"news-empty\">No news yet. Check back soon for club updates.</p>";
-
-        return;
-
-    }
-
-    container.classList.add("news-grid--filled");
-
-    if(newsSection){
-
-        newsSection.classList.add("news-section--filled");
-
-    }
-
-
-    data.forEach(item => {
-
-        const imageBlock = item.photo
-        ? `<img src="${item.photo}" alt="${item.title}" class="news-card-image">`
-        : `<div class="news-card-image news-card-image--placeholder">Club News</div>`;
-
-        container.innerHTML += `
-
-            <article class="news-card">
-
-                ${imageBlock}
-
-                <div class="news-card-body">
-                    <time class="news-card-date">${formatNewsDate(item.news_date)}</time>
-                    <h3 class="news-card-title">${item.title}</h3>
-                    <p class="news-card-excerpt">${item.excerpt}</p>
-                    ${item.content ? `<p class="news-card-content">${item.content}</p>` : ""}
-                </div>
-
-            </article>
-
-        `;
-
-    });
-
-}
-
-
-function formatNewsDate(dateValue){
-
-    if(!dateValue) return "";
-
-    const date = new Date(dateValue + "T12:00:00");
-
-    if(Number.isNaN(date.getTime())){
-
-        return dateValue;
-
-    }
-
-    return date.toLocaleDateString("en-GB", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
-
-}
-
-
-function clearNewsForm(){
-
-    const title = document.getElementById("newsTitle");
-
-    const newsDate = document.getElementById("newsDate");
-
-    const excerpt = document.getElementById("newsExcerpt");
-
-    const content = document.getElementById("newsContent");
-
-    const photo = document.getElementById("newsPhoto");
-
-
-    if(title) title.value = "";
-
-    if(newsDate) newsDate.value = "";
-
-    if(excerpt) excerpt.value = "";
-
-    if(content) content.value = "";
-
-    if(photo) photo.value = "";
 
 }
 
@@ -1018,45 +679,37 @@ async function loadHomepageMatches(){
 
         homepageMatches.innerHTML += `
 
-            <article class="match-card">
+            <div class="player-card">
 
-                <div class="match-card-header">
-                    <span class="match-card-badge">Upcoming</span>
-                    <span class="match-card-venue">League fixture</span>
+                <div class="match-logos">
+
+                    <img
+                    src="${match.homeLogo}"
+                    class="team-logo">
+
+                    <h3>
+                    ${match.homeTeam}
+                    VS
+                    ${match.awayTeam}
+                    </h3>
+
+                    <img
+                    src="${match.awayLogo}"
+                    class="team-logo">
+
                 </div>
 
-                <div class="match-card-body">
-                    <div class="match-teams">
-                        <div class="match-team">
-                            <img
-                            src="${match.homeLogo}"
-                            alt="${match.homeTeam}"
-                            class="team-logo">
-                            <span class="match-team-name">${match.homeTeam}</span>
-                        </div>
+                <p>
+                Date:
+                ${match.matchDate}
+                </p>
 
-                        <span class="match-vs">VS</span>
+                <p>
+                Time:
+                ${match.matchTime}
+                </p>
 
-                        <div class="match-team match-team--away">
-                            <img
-                            src="${match.awayLogo}"
-                            alt="${match.awayTeam}"
-                            class="team-logo">
-                            <span class="match-team-name">${match.awayTeam}</span>
-                        </div>
-                    </div>
-
-                    <div class="match-meta">
-                        <span class="match-meta-item">
-                            <strong>Date</strong> ${match.matchDate}
-                        </span>
-                        <span class="match-meta-item">
-                            <strong>Time</strong> ${match.matchTime}
-                        </span>
-                    </div>
-                </div>
-
-            </article>
+            </div>
 
         `;
 
@@ -1235,13 +888,9 @@ displayPlayers();
 
 displayMatches();
 
-displayNews();
-
 loadHomepagePlayers();
 
 loadHomepageMatches();
-
-loadHomepageNews();
 
 loadClubStats();
 
@@ -1251,7 +900,7 @@ function scrollPlayersLeft(){
         "homepagePlayers"
     ).scrollBy({
 
-        left: -320,
+        left: -350,
 
         behavior: "smooth"
 
@@ -1266,7 +915,7 @@ function scrollPlayersRight(){
         "homepagePlayers"
     ).scrollBy({
 
-        left: 320,
+        left: 350,
 
         behavior: "smooth"
 
@@ -1284,16 +933,10 @@ document.querySelector(".next");
 const prevBtn =
 document.querySelector(".prev");
 
-const heroDotsContainer =
-document.getElementById("heroDots");
-
 let currentSlide = 0;
-let heroIntervalId = null;
 
 
 function showSlide(index){
-
-    if(!slides.length) return;
 
     slides.forEach(slide => {
 
@@ -1303,33 +946,27 @@ function showSlide(index){
 
     slides[index].classList.add("active");
 
-    if(heroDotsContainer){
-
-        const dots =
-        heroDotsContainer.querySelectorAll(".hero-dot");
-
-        dots.forEach((dot, i) => {
-
-            dot.classList.toggle("active", i === index);
-
-        });
-
-    }
-
 }
 
 
-function goToSlide(index){
+nextBtn.addEventListener("click", () => {
 
-    if(!slides.length) return;
-
-    currentSlide = index;
+    currentSlide++;
 
     if(currentSlide >= slides.length){
 
         currentSlide = 0;
 
     }
+
+    showSlide(currentSlide);
+
+});
+
+
+prevBtn.addEventListener("click", () => {
+
+    currentSlide--;
 
     if(currentSlide < 0){
 
@@ -1339,135 +976,21 @@ function goToSlide(index){
 
     showSlide(currentSlide);
 
-}
+});
 
+setInterval(() => {
 
-function startHeroAutoplay(){
+    currentSlide++;
 
-    if(heroIntervalId || !slides.length) return;
+    if(currentSlide >= slides.length){
 
-    heroIntervalId = setInterval(() => {
-
-        goToSlide(currentSlide + 1);
-
-    }, 5000);
-
-}
-
-
-if(slides.length){
-
-    if(heroDotsContainer){
-
-        slides.forEach((_, i) => {
-
-            const dot = document.createElement("button");
-
-            dot.type = "button";
-            dot.className = "hero-dot" + (i === 0 ? " active" : "");
-            dot.setAttribute("aria-label", "Go to slide " + (i + 1));
-
-            dot.addEventListener("click", () => {
-
-                goToSlide(i);
-
-            });
-
-            heroDotsContainer.appendChild(dot);
-
-        });
+        currentSlide = 0;
 
     }
 
-    if(nextBtn){
+    showSlide(currentSlide);
 
-        nextBtn.addEventListener("click", () => {
-
-            goToSlide(currentSlide + 1);
-
-        });
-
-    }
-
-    if(prevBtn){
-
-        prevBtn.addEventListener("click", () => {
-
-            goToSlide(currentSlide - 1);
-
-        });
-
-    }
-
-    startHeroAutoplay();
-
-}
-
-
-const siteHeader =
-document.getElementById("siteHeader");
-
-if(siteHeader){
-
-    window.addEventListener("scroll", () => {
-
-        siteHeader.classList.toggle(
-            "is-scrolled",
-            window.scrollY > 40
-        );
-
-    });
-
-}
-
-
-const navToggle =
-document.getElementById("navToggle");
-
-const navLinks =
-document.getElementById("navLinks");
-
-if(navToggle && navLinks){
-
-    navToggle.addEventListener("click", () => {
-
-        const isOpen =
-        navToggle.classList.toggle("is-open");
-
-        navLinks.classList.toggle("is-open", isOpen);
-
-        navToggle.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
-        );
-
-    });
-
-    navLinks.querySelectorAll("a").forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            navToggle.classList.remove("is-open");
-
-            navLinks.classList.remove("is-open");
-
-            navToggle.setAttribute("aria-expanded", "false");
-
-        });
-
-    });
-
-}
-
-
-const footerYear =
-document.getElementById("footerYear");
-
-if(footerYear){
-
-    footerYear.textContent = new Date().getFullYear();
-
-}
+}, 3000);
 
 
 function logout(){

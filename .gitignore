@@ -1,0 +1,32 @@
+﻿# Visual Studio
+.vs/
+
+# Node
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# Netlify
+.netlify/
+
+# Misc
+coverage/
